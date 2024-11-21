@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cisco.dao.TrainerDAO, com.cisco.pojo.Trainer" %>
+<%@ page import="com.cisco.dao.UserDAO, com.cisco.pojo.User" %>
 <%@ page import="java.util.*" %>
 <%
+    // Fetch all trainers
     TrainerDAO trainerDAO = new TrainerDAO();
     List<Trainer> trainers = trainerDAO.getAllTrainers();
+
+    // Fetch all users
+    UserDAO userDAO = new UserDAO();
+    List<User> users = userDAO.getAllUsers(); // Assuming this method exists
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +20,7 @@
 <body>
     <div class="container">
         <h2>Admin Dashboard</h2>
+        
         <h3>Manage Trainers</h3>
         <table>
             <tr>
@@ -40,7 +47,43 @@
                 }
             %>
         </table>
+        
         <p><a href="add_trainer.jsp">Add New Trainer</a></p>
+
+        <h3>Registered Users</h3>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Trainer Name</th> <!-- New column for Trainer Name -->
+                <th>Actions</th>
+            </tr>
+            <%
+                for (User user : users) {
+                    // Fetch the trainer name based on trainerId
+                    String trainerName = trainerDAO.getTrainerNameById(user.getTrainerId()); // Now this method exists
+            %>
+            <tr>
+                <td><%= user.getUserId() %></td>
+                <td><%= user.getName() %></td>
+                <td><%= user.getPhoneNumber() %></td>
+                <td><%= user.getEmail() %></td>
+                <td><%= user.getGender() %></td>
+                <td><%= trainerName != null ? trainerName : "N/A" %></td> <!-- Display trainer name -->
+                <td>
+                    <a href="view_user.jsp?id=<%= user.getUserId() %>">View</a>
+                    <a href="delete_user.jsp?id=<%= user.getUserId() %>">Delete</a>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+        
+        <p><a href="register_user.jsp">Add New User</a></p>
     </div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.cisco.dbutil.DbUtil;
 import com.cisco.pojo.Trainer;
 
 public class TrainerDAO {
+	
     
     // Method to add a trainer and return success status
     public boolean addTrainer(Trainer trainer) {
@@ -93,4 +94,22 @@ public class TrainerDAO {
             e.printStackTrace();
         }
     }
+    
+    public String getTrainerNameById(int trainerId) {
+        String trainerName = null;
+        try (Connection con = DbUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT name FROM trainer WHERE trainer_id = ?")) {
+            ps.setInt(1, trainerId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                trainerName = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return trainerName;
+    }
+    
+    
+
 }

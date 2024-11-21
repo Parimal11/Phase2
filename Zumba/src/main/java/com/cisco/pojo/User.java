@@ -6,6 +6,7 @@ public class User {
     private String phoneNumber;
     private String email;
     private String gender;
+    private int trainerId; // New field for trainer ID
 
     // Getters and Setters
     public int getUserId() {
@@ -48,10 +49,15 @@ public class User {
         this.gender = gender;
     }
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-    
-    
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
+    }
+
+    public User() {
+        super();
+    }
 }
