@@ -6,6 +6,7 @@
     String slotDate = request.getParameter("slot_date");
     String slotTime = request.getParameter("slot_time");
     int maxSlots = Integer.parseInt(request.getParameter("max_slots"));
+    String trainerEmail = request.getParameter("trainer_email"); // Retrieve the trainer email
 
     Trainer trainer = new Trainer();
     trainer.setTrainerId(trainerId);
@@ -13,6 +14,7 @@
     trainer.setSlotDate(slotDate);
     trainer.setSlotTime(slotTime);
     trainer.setMaxSlots(maxSlots);
+    trainer.setTrainerEmail(trainerEmail); // Set the trainer email
 
     TrainerDAO trainerDAO = new TrainerDAO();
     trainerDAO.updateTrainer(trainer);

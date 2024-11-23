@@ -20,6 +20,7 @@
             Slot Date: <input type="date" name="slot_date" value="<%= trainer.getSlotDate() %>" required><br>
             Slot Time: <input type="time" name="slot_time" value="<%= trainer.getSlotTime() %>" required><br>
             Max Slots: <input type="number" name="max_slots" value="<%= trainer.getMaxSlots() %>" required><br>
+            Trainer Email: <input type="email" name="trainer_email" value="<%= trainer.getTrainerEmail() %>" required><br> <!-- New email field -->
             <input type="submit" value="Update Trainer">
         </form>
     </div>

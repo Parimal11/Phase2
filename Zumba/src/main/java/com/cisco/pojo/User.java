@@ -6,7 +6,7 @@ public class User {
     private String phoneNumber;
     private String email;
     private String gender;
-    private int trainerId; // New field for trainer ID
+    private String trainerEmail; // New field for trainer ID
 
     // Getters and Setters
     public int getUserId() {
@@ -49,13 +49,13 @@ public class User {
         this.gender = gender;
     }
 
-    public int getTrainerId() {
-        return trainerId;
+    public String getTrainerEmail() { // New getter for trainerEmail
+        return trainerEmail;
+    }
+    public void setTrainerEmail(String trainerEmail) { // New setter for trainerEmail
+        this.trainerEmail = trainerEmail;
     }
 
-    public void setTrainerId(int trainerId) {
-        this.trainerId = trainerId;
-    }
 
     public User() {
         super();

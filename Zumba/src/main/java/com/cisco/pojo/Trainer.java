@@ -1,12 +1,12 @@
 package com.cisco.pojo;
 
-
 public class Trainer {
     private int trainerId;
     private String name;
     private String slotDate;
     private String slotTime;
     private int maxSlots;
+    private String trainerEmail; // New field for trainer email
 
     // Getters and Setters
     public int getTrainerId() {
@@ -49,17 +49,11 @@ public class Trainer {
         this.maxSlots = maxSlots;
     }
 
-    public Trainer(String name, String slotDate, String slotTime, int maxSlots) {
-        this.name = name;
-        this.slotDate = slotDate;
-        this.slotTime = slotTime;
-        this.maxSlots = maxSlots;
+    public String getTrainerEmail() {
+        return trainerEmail;
     }
 
-	public Trainer() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-    
-    
+    public void setTrainerEmail(String trainerEmail) {
+        this.trainerEmail = trainerEmail;
+    }
 }

@@ -5,15 +5,17 @@
     String phoneNumber = request.getParameter("phone_number");
     String email = request.getParameter("email");
     String gender = request.getParameter("gender");
+    String trainerEmail = request.getParameter("trainer_email"); // New field for trainer email
 
     User user = new User();
     user.setName(name);
     user.setPhoneNumber(phoneNumber);
-    user.setEmail(email);
+    user.setEmail(email); // Assuming this is the correct method for user email
     user.setGender(gender);
+    user.setTrainerEmail(trainerEmail); // Set trainer email
 
     UserDAO userDAO = new UserDAO();
-    userDAO.registerUser(user);
+    userDAO.registerUser(user); // Ensure this method is updated to handle trainer_email
 %>
 <!DOCTYPE html>
 <html>

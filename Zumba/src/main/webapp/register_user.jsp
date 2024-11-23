@@ -16,6 +16,8 @@
             Email: <input type="email" name="email" required>
 
             Gender: <input type="text" name="gender" required>
+            
+            Trainer Email: <input type="email" name="trainer_email" required><br>
 
             <input type="submit" value="Register">
         </form>

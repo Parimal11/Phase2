@@ -8,17 +8,17 @@ import com.cisco.dbutil.DbUtil;
 import com.cisco.pojo.Trainer;
 
 public class TrainerDAO {
-	
     
     // Method to add a trainer and return success status
     public boolean addTrainer(Trainer trainer) {
         boolean success = false; // Initialize success flag
         try (Connection con = DbUtil.getConnection();
-             PreparedStatement ps = con.prepareStatement("INSERT INTO trainer (name, slot_date, slot_time, max_slots) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement ps = con.prepareStatement("INSERT INTO trainer (name, slot_date, slot_time, max_slots, trainer_email) VALUES (?, ?, ?, ?, ?)")) {
             ps.setString(1, trainer.getName());
             ps.setString(2, trainer.getSlotDate());
             ps.setString(3, trainer.getSlotTime());
             ps.setInt(4, trainer.getMaxSlots());
+            ps.setString(5, trainer.getTrainerEmail()); // Set the trainer email
             ps.executeUpdate();
             success = true; // Set to true if insertion is successful
         } catch (SQLException e) {
@@ -40,6 +40,7 @@ public class TrainerDAO {
                 trainer.setSlotDate(rs.getString("slot_date"));
                 trainer.setSlotTime(rs.getString("slot_time"));
                 trainer.setMaxSlots(rs.getInt("max_slots"));
+                trainer.setTrainerEmail(rs.getString("trainer_email")); // Retrieve the trainer email
                 trainers.add(trainer);
             }
         } catch (SQLException e) {
@@ -73,6 +74,7 @@ public class TrainerDAO {
                 trainer.setSlotDate(rs.getString("slot_date"));
                 trainer.setSlotTime(rs.getString("slot_time"));
                 trainer.setMaxSlots(rs.getInt("max_slots"));
+                trainer.setTrainerEmail(rs.getString("trainer_email")); // Retrieve the trainer email
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,23 +85,25 @@ public class TrainerDAO {
     // Method to update a trainer's details
     public void updateTrainer(Trainer trainer) {
         try (Connection con = DbUtil.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE trainer SET name=?, slot_date=?, slot_time=?, max_slots=? WHERE trainer_id=?")) {
+             PreparedStatement ps = con.prepareStatement("UPDATE trainer SET name=?, slot_date=?, slot_time=?, max_slots=?, trainer_email=? WHERE trainer_id=?")) {
             ps.setString(1, trainer.getName());
             ps.setString(2, trainer.getSlotDate());
             ps.setString(3, trainer.getSlotTime());
             ps.setInt(4, trainer.getMaxSlots());
-            ps.setInt(5, trainer.getTrainerId());
+            ps.setString(5, trainer.getTrainerEmail()); // Update the trainer email
+            ps.setInt(6, trainer.getTrainerId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public String getTrainerNameById(int trainerId) {
+    // Method to get trainer name by ID
+    public String getTrainerNameByEmail(String trainerEmail) {
         String trainerName = null;
         try (Connection con = DbUtil.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT name FROM trainer WHERE trainer_id = ?")) {
-            ps.setInt(1, trainerId);
+             PreparedStatement ps = con.prepareStatement("SELECT name FROM trainer WHERE trainer_email = ?")) {
+            ps.setString(1, trainerEmail);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 trainerName = rs.getString("name");
@@ -109,7 +113,4 @@ public class TrainerDAO {
         }
         return trainerName;
     }
-    
-    
-
 }

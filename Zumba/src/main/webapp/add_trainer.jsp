@@ -13,6 +13,7 @@
             Slot Date: <input type="date" name="slot_date" required><br>
             Slot Time: <input type="time" name="slot_time" required><br>
             Max Slots: <input type="number" name="max_slots" required><br>
+            Trainer Email: <input type="email" name="trainer_email" required><br> <!-- New email field -->
             <input type="submit" value="Add Trainer">
         </form>
     </div>

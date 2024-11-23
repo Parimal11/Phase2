@@ -14,6 +14,7 @@
     trainer.setSlotDate(request.getParameter("slot_date"));
     trainer.setSlotTime(request.getParameter("slot_time"));
     trainer.setMaxSlots(Integer.parseInt(request.getParameter("max_slots")));
+    trainer.setTrainerEmail(request.getParameter("trainer_email")); // Set the trainer email
 
     boolean isAdded = trainerDAO.addTrainer(trainer);
     if (isAdded) {
@@ -27,5 +28,6 @@
     }
 %>
     <a href="add_trainer.jsp">Add another trainer</a>
+    <a href="admin_dashboard.jsp">Do to Admin Dashboard</a>
 </body>
 </html>

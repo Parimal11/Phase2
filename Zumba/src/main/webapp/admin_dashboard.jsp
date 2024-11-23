@@ -25,6 +25,7 @@
         <table>
             <tr>
                 <th>Trainer Name</th>
+                <th>Trainer Email</th>
                 <th>Slot Date</th>
                 <th>Slot Time</th>
                 <th>Max Slots</th>
@@ -35,9 +36,11 @@
             %>
             <tr>
                 <td><%= trainer.getName() %></td>
+                <td><%= trainer.getTrainerEmail() %>
                 <td><%= trainer.getSlotDate() %></td>
                 <td><%= trainer.getSlotTime() %></td>
                 <td><%= trainer.getMaxSlots() %></td>
+                
                 <td>
                     <a href="edit_trainer.jsp?id=<%= trainer.getTrainerId() %>">Edit</a>
                     <a href="delete_trainer.jsp?id=<%= trainer.getTrainerId() %>">Delete</a>
@@ -58,13 +61,13 @@
                 <th>Phone Number</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th>Trainer Name</th> <!-- New column for Trainer Name -->
+                <th>Trainer Email</th> <!-- Updated to Trainer Email -->
                 <th>Actions</th>
             </tr>
             <%
                 for (User user : users) {
-                    // Fetch the trainer name based on trainerId
-                    String trainerName = trainerDAO.getTrainerNameById(user.getTrainerId()); // Now this method exists
+                    // Fetch the trainer email based on trainerId
+                    String trainerEmail = trainerDAO.getTrainerNameByEmail(user.getTrainerEmail()); // Updated method
             %>
             <tr>
                 <td><%= user.getUserId() %></td>
@@ -72,10 +75,11 @@
                 <td><%= user.getPhoneNumber() %></td>
                 <td><%= user.getEmail() %></td>
                 <td><%= user.getGender() %></td>
-                <td><%= trainerName != null ? trainerName : "N/A" %></td> <!-- Display trainer name -->
+                <td><%= trainerEmail != null ? trainerEmail : "N/A" %></td> <!-- Display trainer email -->
                 <td>
-                    <a href="view_user.jsp?id=<%= user.getUserId() %>">View</a>
+                    <a href="edit_user.jsp?id=<%= user.getUserId() %>">Edit</a>
                     <a href="delete_user.jsp?id=<%= user.getUserId() %>">Delete</a>
+                    <a href="view_user.jsp?id=<%= user.getUserId() %>">View</a>
                 </td>
             </tr>
             <%
